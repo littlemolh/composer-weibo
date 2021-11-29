@@ -372,7 +372,7 @@ use littlemo\weibo\JsApi;
 
 $JsApi = new JsApi($client_id);
 
-$result = $JsApi->signature($jsapi_ticket, &$noncestr,  &$timestamp, &$url, &$client_id);
+$result = $JsApi->signature($jsapi_ticket, $noncestr,  $timestamp, $url, $client_id);
 
 
 ```
@@ -391,6 +391,17 @@ $result = $JsApi->signature($jsapi_ticket, &$noncestr,  &$timestamp, &$url, &$cl
 **返回示例**
 ```string
 Wm3WZYTPz0wzccnW
+```
+
+示例
+```php
+[
+    'appkey' => $client_id,
+    'timestamp' => $timestamp,
+    'noncestr' => $noncestr,
+    'signature' => $result,
+    'url' => $url,
+];
 ```
 
 > [官方文档](https://open.weibo.com/wiki/Weibo-JS_V2)
