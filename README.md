@@ -316,6 +316,85 @@ $intactMsg = $Class->getIntactMsg();
 
 > [官方文档](https://open.weibo.com/wiki/2/users/domain_show)
 
+#### jsapi_ticket
+
+> jsapi_ticket 是网页用于调用微博客户端内JS接口的临时票据
+
+
+
+##### 示例代码
+
+
+```php
+use littlemo\weibo\JsApi;
+
+$JsApi = new JsApi($client_id, $client_secret);
+
+$result = $JsApi->ticket($access_token, $domain);
+
+if ($result) {
+    echo '获取 ticket 成功';
+    $token = $JsApi->getMessage();
+} else {
+    echo "获取 ticket 失败";
+    $errorMsg = $JsApi->getErrorMsg();
+}
+
+//查询完整的回调消息
+$intactMsg = $Class->getIntactMsg();
+
+
+```
+
+> 其中，js_ticket 为需要获取的 jsapi_ticket ，expire_time 为过期时间。
+
+**返回示例**
+```json
+{
+    "result": true,
+    "appkey": "",
+    "js_ticket": "",
+    "expire_time": 7199
+}
+```
+
+> [官方文档](https://open.weibo.com/wiki/Weibo-JS_V2)
+
+#### 签名算法
+
+> jsapi_ticket 是网页用于调用微博客户端内JS接口的临时票据
+
+##### 示例代码
+
+
+```php
+use littlemo\weibo\JsApi;
+
+$JsApi = new JsApi($client_id);
+
+$result = $JsApi->signature($jsapi_ticket, &$noncestr,  &$timestamp, &$url, &$client_id);
+
+
+```
+
+参数
+|     参数     |  类型  | 是否必填 | 说明                                     |
+| :----------: | :----: | :------: | :--------------------------------------- |
+| jsapi_ticket | string |    Y     | 网页用于调用微博客户端内JS接口的临时票据 |
+|   noncestr   | string |    N     | 随机字符串                               |
+|  timestamp   | string |    N     | 时间戳                                   |
+|     url      | string |    N     | 当前网页的URL，不包含#及其后面部分       |
+|  client_id   | string |    Y     | 申请应用时分配的AppKey。                 |
+
+> 其中，js_ticket 为需要获取的 jsapi_ticket ，expire_time 为过期时间。
+
+**返回示例**
+```string
+Wm3WZYTPz0wzccnW
+```
+
+> [官方文档](https://open.weibo.com/wiki/Weibo-JS_V2)
+
 ### 参与贡献
 
 1.  littlemo
